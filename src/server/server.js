@@ -1,4 +1,4 @@
-export const hello =  () => {
+export const hello = () => {
   console.log('Hello Babel')
 }
 
