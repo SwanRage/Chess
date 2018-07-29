@@ -1,4 +1,4 @@
-if (process.env.ENV === 'server') {
+if (process.argv.includes('node')) {
 
   module.exports = {
     "presets": [
@@ -21,7 +21,8 @@ if (process.env.ENV === 'server') {
           chrome: "67",
           safari: "11.1"
         },
-        useBuiltIns: "usage"
+        useBuiltIns: "usage",
+        modules: false
       }]
     ]
   }
