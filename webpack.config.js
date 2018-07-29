@@ -1,25 +1,14 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebPackPlugin = require('html-webpack-plugin')
 
-const moduleObj = {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
-};
 
 const client = {
     devtool: 'source-map',
     devServer: {
-      contentBase: path.join(__dirname, 'dist', 'public'),
+      contentBase: path.join(__dirname, 'src', 'public'),
       compress: true,
-      port: 80
+      port: 80,
+      open: true
     },
     entry: {
         'client': './src/client/client.js'
@@ -29,12 +18,17 @@ const client = {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist/public')
     },
-    module: moduleObj,
-    plugins: [
-      new HtmlWebPackPlugin({
-        template: 'src/client/index.html'
-      })
-  ]
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader'
+          }
+        }
+      ]
+    }
 };
 
 const server = {
@@ -47,7 +41,18 @@ const server = {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
-    externals: [nodeExternals()]
+    externals: [nodeExternals()],
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader'
+          }
+        }
+      ]
+    }
 };
 
 module.exports = [client, server];
