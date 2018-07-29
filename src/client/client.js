@@ -1,5 +1,5 @@
 export const hello =  () => {
-  console.log("ahdjojugherjoghdfjhgjklsdf")
+  console.log("time cube is real")
 }
 
 hello()
